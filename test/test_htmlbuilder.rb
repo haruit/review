@@ -546,4 +546,33 @@ EOS
 EOS
     assert_equal expect, @builder.raw_result
   end
+
+  def test_rawblockfor_latex
+    expect = ''
+    @builder.rawblockfor([
+                          @compiler.text("<>!\"&';*#,@\\"),
+                          @compiler.text(""),
+                          @compiler.text("&lt;&gt;&amp;&quot;")
+                         ],
+                         "latex")
+    assert_equal expect, @builder.raw_result
+  end
+
+  def test_rawblockfor_html
+    expect =<<-EOS
+<>!\"&';*#,@\\
+
+&lt;&gt;&amp;&quot;
+EOS
+
+    lines = []
+    expect.each_line {|line|
+      lines << @compiler.text(line)
+    }
+
+    @builder.rawblockfor(lines, "html")
+    
+    assert_equal expect, @builder.raw_result
+  end
+
 end

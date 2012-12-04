@@ -26,6 +26,7 @@ module ReVIEW
     }
 
     Compiler.defblock(:memo, 0..1)
+    Compiler.defblock(:rawblockfor, 1)
     Compiler.defsingle(:latextsize, 1)
 
     def extname
@@ -808,6 +809,13 @@ module ReVIEW
 
     def olnum(num)
       @ol_num = num.to_i
+    end
+
+    def rawblockfor(lines, fmt)
+      return unless fmt == 'latex'
+      lines.each do |line|
+        puts unescape_latex(line)
+      end
     end
 
   end

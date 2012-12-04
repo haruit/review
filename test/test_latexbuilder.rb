@@ -653,4 +653,14 @@ EOS
     assert_equal expect.chomp, @builder.raw_result
   end
 
+  def test_rawblockfor_latex
+    @builder.rawblockfor(["<>!\"&';*#,@\\", "\\LaTeX"], "latex")
+    assert_equal %Q|<>!"&\';*\#,@\\\n\\LaTeX\n|, @builder.result
+  end
+
+  def test_rawblockfor_html
+    @builder.rawblockfor(["<>!\"&';*#,@\\", "\\LaTeX"], "html")
+    assert_equal '', @builder.result
+  end
+
 end

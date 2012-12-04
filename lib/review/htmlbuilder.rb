@@ -33,6 +33,7 @@ module ReVIEW
     Compiler.defblock(:notice, 0..1)
     Compiler.defblock(:point, 0..1)
     Compiler.defblock(:shoot, 0..1)
+    Compiler.defblock(:rawblockfor, 1)
 
     def pre_paragraph
       '<p>'
@@ -1080,6 +1081,13 @@ QUOTE
 
     def olnum(num)
       @ol_num = num.to_i
+    end
+
+    def rawblockfor(lines, fmt)
+      return unless fmt == 'html'
+      lines.each do |line|
+        puts line.gsub("&lt;", "<").gsub("&gt;", ">").gsub("&quot;", "\"").gsub("&amp;", "&")
+      end
     end
   end
 
