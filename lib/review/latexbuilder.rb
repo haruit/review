@@ -755,6 +755,12 @@ module ReVIEW
         puts detab(line)
       end
     end
+    
+    # need to override in review-ext.rb
+    def index_db(str)
+      # @index_db[str]
+      "あ"
+    end
 
     def index(str)
       str.sub!(/\(\)/, '')
@@ -770,7 +776,7 @@ module ReVIEW
           '\index{' + escape_index(text(str)) + decl + '}'
         end
       else
-        '\index{' + escape_index(@index_db[str]) + '@' + escape_index(text(str)) + '}'
+        '\index{' + escape_index(index_db(str)) + '@' + escape_index(text(str)) + '}'
       end
     end
 

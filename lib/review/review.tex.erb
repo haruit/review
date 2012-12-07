@@ -154,6 +154,11 @@
 
 \usepackage[T1]{fontenc}
 
+<% if values["makeidx"] %>
+\usepackage{makeidx}
+\makeindex
+<% end %>
+
 \begin{document}
 
 \reviewmainfont
@@ -206,6 +211,13 @@
 \renewcommand{\chaptermark}[1]{\markboth{\appendixname\thechapter~#1}{}}
 \reviewappendix
 <%= values["post_str"] %>
+
+<%if values["makeidx"] %>
+\cleardoublepage
+\phantomsection
+\printindex
+%% \cleardoublepage
+<% end %>
 
 <% if values["colophon"] %>
 %% okuduke

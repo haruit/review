@@ -102,6 +102,12 @@ def main
       exec("platex -kanji=#{kanji} book.tex")
     }
     Process.waitall
+    if File.exists? 'book.idx'
+      fork {
+        exec("mendex book.idx")
+      }
+      Process.waitall
+    end
     fork {
       exec("platex -kanji=#{kanji} book.tex")
     }
